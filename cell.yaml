@@ -9,6 +9,8 @@ resources:
     - owner_scope
     - category
     - status
+    ranges:
+    - [period_start, period_end]
     fields:
       name:
         type: text
