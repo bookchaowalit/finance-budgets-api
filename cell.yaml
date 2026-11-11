@@ -5,6 +5,8 @@ cell: budgets
 title: Budgets
 resources:
   budget-plan:
+    legacy_columns:
+      scope: owner_scope
     filters:
     - scope
     - category
