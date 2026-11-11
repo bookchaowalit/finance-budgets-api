@@ -18,7 +18,7 @@ Every resource has list, stats, get, get-by-legacy-id, create, patch and delete
 
 | Path | Resource | Filters |
 |---|---|---|
-| `/v1/budget-plans` | budget-plan | `owner_scope`, `category`, `status` |
+| `/v1/budget-plans` | budget-plan | `scope`, `category`, `status` |
 
 ## Develop and operate
 

@@ -62,9 +62,15 @@ def test_a_date_must_be_a_real_calendar_date(client, owner):
     assert response.status_code == 422
 
 
-def test_owner_scope_must_be_a_known_scope(client, owner):
-    response = create(client, owner, name="Odd scope", owner_scope="family")
-    assert response.status_code == 422
+def test_scope_is_a_free_label_of_at_most_64_characters(client, owner):
+    labelled = create(client, owner, name="Family scope", scope="family")
+    assert labelled.status_code == 201, labelled.text
+    assert labelled.json()["scope"] == "family"
+    assert create(client, owner, name="Long scope", scope="x" * 65).status_code == 422
+    assert (
+        create(client, owner, name="Old field", owner_scope="venture").status_code
+        == 422
+    )
 
 
 def test_status_must_be_a_known_status(client, owner):
@@ -72,8 +78,9 @@ def test_status_must_be_a_known_status(client, owner):
     assert response.status_code == 422
 
 
-def test_currency_code_is_at_most_12_characters(client, owner):
+def test_currency_code_is_iso_4217(client, owner):
     assert create(client, owner, name="Long ccy", currency="C" * 13).status_code == 422
+    assert create(client, owner, name="Lower ccy", currency="usd").status_code == 422
     assert create(client, owner, name="USD plan", currency="USD").status_code == 201
 
 

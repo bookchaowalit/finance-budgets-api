@@ -13,12 +13,12 @@ def test_list_filters_by_category(client, owner):
 
 
 def test_list_filters_by_status_and_scope(client, owner):
-    create(client, owner, name="Live venture", status="active", owner_scope="venture")
-    create(client, owner, name="Draft venture", owner_scope="venture")
+    create(client, owner, name="Live venture", status="active", scope="venture")
+    create(client, owner, name="Draft venture", scope="venture")
     listed = client.get(
         BUDGET_PLANS,
         headers=owner,
-        params={"status": "active", "owner_scope": "venture"},
+        params={"status": "active", "scope": "venture"},
     )
     assert listed.status_code == 200, listed.text
     assert [item["name"] for item in listed.json()["items"]] == ["Live venture"]
@@ -104,7 +104,7 @@ def test_a_plan_cannot_be_given_a_negative_amount_on_update(client, owner):
     path = f"{BUDGET_PLANS}/{plan['id']}"
     refused = client.patch(path, headers=owner, json={"planned_amount": -5})
     assert refused.status_code == 422
-    assert client.get(path, headers=owner).json()["planned_amount"] == 75
+    assert client.get(path, headers=owner).json()["planned_amount"] == "75.0000"
 
 
 def test_a_required_field_cannot_be_cleared(client, owner):

@@ -1,12 +1,12 @@
 # Budgets cell: one of the ten finance services split from the retired finance_* tables (2026-10-12).
 # Planned spending per category and period.
-# Amounts are real (float) like every kit cell; cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
+# Amounts are exact (money = numeric(19,4), decimal = numeric(30,10); SPEC-003); cross-cell ids (account_id, ...) are plain bigints, not foreign keys.
 cell: budgets
 title: Budgets
 resources:
   budget-plan:
     filters:
-    - owner_scope
+    - scope
     - category
     - status
     ranges:
@@ -16,15 +16,10 @@ resources:
         type: text
         required: true
         max_length: 200
-      owner_scope:
-        type: enum
-        values:
-        - personal
-        - solo_empire
-        - venture
-        - client
-        - shared
-        default: solo_empire
+      scope:
+        type: text
+        max_length: 64
+        default: ''
       category:
         type: text
       period_start:
@@ -34,13 +29,12 @@ resources:
         type: date
         required: true
       planned_amount:
-        type: real
+        type: money
         min: 0
         required: true
       currency:
-        type: text
+        type: currency
         default: THB
-        max_length: 12
       status:
         type: enum
         values:

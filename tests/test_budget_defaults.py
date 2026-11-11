@@ -3,11 +3,11 @@
 from budget_helpers import BUDGET_PLANS, create
 
 
-def test_new_plan_defaults_to_solo_empire_draft_thb(client, owner):
+def test_new_plan_defaults_to_an_empty_scope_draft_thb(client, owner):
     response = create(client, owner, name="Defaults")
     assert response.status_code == 201, response.text
     plan = response.json()
-    assert plan["owner_scope"] == "solo_empire"
+    assert plan["scope"] == ""
     assert plan["status"] == "draft"
     assert plan["currency"] == "THB"
     assert plan["version"] == 1
@@ -15,8 +15,8 @@ def test_new_plan_defaults_to_solo_empire_draft_thb(client, owner):
 
 
 def test_planned_amount_keeps_its_decimal_value(client, owner):
-    plan = create(client, owner, name="Decimal", planned_amount=1234.56).json()
-    assert plan["planned_amount"] == 1234.56
+    plan = create(client, owner, name="Decimal", planned_amount="1234.56").json()
+    assert plan["planned_amount"] == "1234.5600"
 
 
 def test_two_plans_may_share_a_name_and_period(client, owner):

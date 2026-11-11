@@ -17,7 +17,7 @@ api
 ## Product Purpose
 
 The list of planned spending: one budget plan per category and period, with the amount planned,
-the owner scope it belongs to and where it stands (draft, active, closed, cancelled). Actual
+the scope label it belongs to and where it stands (draft, active, closed, cancelled). Actual
 spending is not stored here; consumers compare a plan to the transactions of the same category
 and period.
 
@@ -41,13 +41,14 @@ workspace-scoped, so the same service can serve other tenants without code chang
 
 ## Capabilities and Constraints
 
-- `/v1/budget-plans`: list (filters `owner_scope`, `category`, `status`; ordered by id), stats
+- `/v1/budget-plans`: list (filters `scope`, `category`, `status`; ordered by id), stats
   (grouped by one of those filters), get, get-by-legacy-id, create (with `Idempotency-Key`),
   patch (with `expected_version`), delete.
 - Rules: `name` (at most 200 characters), `period_start`, `period_end` and `planned_amount` are
-  required; `planned_amount` cannot be negative (zero is allowed); `owner_scope` (default
-  `solo_empire`) and `status` (default `draft`) are fixed enums; `currency` defaults to THB and
-  has at most 12 characters; `period_end` cannot be before `period_start`, on create or on update
+  required; `planned_amount` is exact money (`numeric(19,4)`, a JSON string such as `"1234.5600"`)
+  and cannot be negative (zero is allowed); `scope` is a free label the workspace defines (at most
+  64 characters, default empty); `status` (default `draft`) is a fixed enum; `currency` is an
+  ISO 4217 code (three upper-case letters, default THB) (SPEC-003); `period_end` cannot be before `period_start`, on create or on update
   (422 `invalid_value` naming both fields; the same day for both is allowed).
 - Plan names are not unique: two plans may share a name, category and period.
 - Out of scope: spent amounts and category lists (kept by `finance-transactions-api`), and
@@ -57,6 +58,6 @@ workspace-scoped, so the same service can serve other tenants without code chang
 
 Proposed (nothing collects them yet):
 
-- Active plans whose period covers today, per owner scope.
+- Active plans whose period covers today, per scope label.
 - Share of transactions' categories that have an active plan in the current period.
 - 5xx rate and p95 latency on `/v1/budget-plans` (Sentry and uptime worker).
