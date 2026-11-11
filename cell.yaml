@@ -5,6 +5,8 @@ cell: budgets
 title: Budgets
 resources:
   budget-plan:
+    # SPEC-005: reference data only in events (no amounts, names or notes).
+    graph: [scope, period_start, period_end, currency, status]
     legacy_columns:
       scope: owner_scope
     filters:
