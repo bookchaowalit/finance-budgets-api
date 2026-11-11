@@ -83,7 +83,7 @@ def test_a_patch_that_changes_nothing_keeps_the_version(client, owner):
     same = client.patch(
         f"{BUDGET_PLANS}/{plan['id']}",
         headers=owner,
-        json={"name": "Stable", "planned_amount": 50},
+        json={"name": "Stable", "planned_amount": 50, "expected_version": 1},
     )
     assert same.status_code == 200, same.text
     assert same.json()["version"] == 1
