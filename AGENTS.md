@@ -7,9 +7,10 @@
   the hosted database or the hosted platform.
 - Run `.venv/bin/pytest -q`, `.venv/bin/mypy .` and `uvx ruff@0.17.1 check . && uvx ruff@0.17.1 format --check .` before committing. Migrations are append-only: never edit
   an applied file, add a new numbered one.
-- `src/cellkit` is this repository's own service code (first generated from `cell.yaml`; the shared
-  generator was retired on 2026-10-12). Change it here; there is nothing upstream to sync from.
-  Cell-specific code lives in `src/solo_budgets/`.
+- The cell toolkit is the pinned `platform-cellkit` package (import name `cellkit`; owner
+  decision 2026-11-12). Kit changes go to https://github.com/bookchaowalit/platform-cellkit, then
+  bump the wheel URL in `pyproject.toml` and run `uv lock`. This repository owns `cell.yaml`,
+  migrations, `src/solo_budgets/` and its tests; never copy kit code back into `src/`.
 - This is one of the ten finance services (finance-accounts, transactions, budgets, cash-flow,
   reconciliations, business-assets, investments, liabilities, subscriptions, tax). Ids that point into
   another finance service (`account_id`, `subscription_id`) are checked on write against event-fed copies
