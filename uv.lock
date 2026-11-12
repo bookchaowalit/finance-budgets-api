@@ -150,7 +150,7 @@ requires-dist = [
     { name = "mcp", marker = "extra == 'mcp'", specifier = ">=2.3,<3" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4" },
     { name = "pgserver", marker = "extra == 'dev'", specifier = ">=0.1.4" },
-    { name = "platform-cellkit", extras = ["kafka"], url = "https://github.com/bookchaowalit/platform-cellkit/releases/download/v1.0.1/platform_cellkit-1.0.1-py3-none-any.whl" },
+    { name = "platform-cellkit", extras = ["kafka"], url = "https://github.com/bookchaowalit/platform-cellkit/releases/download/v1.0.2/platform_cellkit-1.0.2-py3-none-any.whl" },
     { name = "platform-cellkit", extras = ["mcp"], marker = "extra == 'mcp'" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2,<4" },
     { name = "pyjwt", extras = ["crypto"], specifier = ">=2.10,<3" },
@@ -952,8 +952,8 @@ wheels = [
 
 [[package]]
 name = "platform-cellkit"
-version = "1.0.1"
-source = { url = "https://github.com/bookchaowalit/platform-cellkit/releases/download/v1.0.1/platform_cellkit-1.0.1-py3-none-any.whl" }
+version = "1.0.2"
+source = { url = "https://github.com/bookchaowalit/platform-cellkit/releases/download/v1.0.2/platform_cellkit-1.0.2-py3-none-any.whl" }
 dependencies = [
     { name = "fastapi" },
     { name = "httpx" },
@@ -964,7 +964,7 @@ dependencies = [
     { name = "uvicorn", extra = ["standard"] },
 ]
 wheels = [
-    { url = "https://github.com/bookchaowalit/platform-cellkit/releases/download/v1.0.1/platform_cellkit-1.0.1-py3-none-any.whl", hash = "sha256:18474d5c2ec07d9b88ed4ce48eb3255f471b21850a6b7772b0b0ada545022eee" },
+    { url = "https://github.com/bookchaowalit/platform-cellkit/releases/download/v1.0.2/platform_cellkit-1.0.2-py3-none-any.whl", hash = "sha256:6f50df17763991e3e61bcbf45ca1b5931d9b9fb575a4a48ffb378033977d900f" },
 ]
 
 [package.optional-dependencies]
