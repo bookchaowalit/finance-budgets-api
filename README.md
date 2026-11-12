@@ -14,7 +14,7 @@ HTTP with the caller's token.
 ## API
 
 Every resource has list, stats, get, get-by-legacy-id, create, patch and delete
-(see `cellkit/app.py`). Permissions are `budgets.<resource>:read|write|delete`.
+(see `cellkit/app.py` in [platform-cellkit](https://github.com/bookchaowalit/platform-cellkit)). Permissions are `budgets.<resource>:read|write|delete`.
 
 | Path | Resource | Filters |
 |---|---|---|
@@ -40,6 +40,6 @@ Railway's Wait for CI (`checkSuites`). A merge to `main` deploys only after the 
 checks pass; a failing check leaves production on the previous deployment. Roll back by
 redeploying an earlier deployment in Railway. `railway up` is no longer used.
 
-Railway variables: `SENTRY_DSN` (error reporting; unset = off, see `src/cellkit/_sentry.py`),
+Railway variables: `SENTRY_DSN` (error reporting; unset = off, see `cellkit/_sentry.py` in platform-cellkit),
 `BUDGETS_DB_MODE=hosted`, `BUDGETS_DB_URL_API`,
 `BUDGETS_JWT_PUBLIC_KEY_PEM`, `BUDGETS_JWT_ISSUER`, `EMPIRE_PLATFORM_URL`.
